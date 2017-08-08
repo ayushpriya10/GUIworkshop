@@ -1,5 +1,12 @@
 from tkinter import *
 import json
+'''
+login = Tk()
+login.title('Login Screen')
+
+details = Tk()
+details.title('User Details')
+'''
 
 window = Tk()
 window.title('Registration Form')
@@ -34,8 +41,10 @@ femaleRB.grid(row = 2, column = 2)
 vCB1 = IntVar()
 vCB2 = IntVar()
 vCB3 = IntVar()
+langLabel = Label(window, text = 'Select the languages you know: ')
+langLabel.grid(row = 3)
 pythonCB = Checkbutton(window, text = 'Python', variable = vCB1)
-pythonCB.grid(row = 3)
+pythonCB.grid(row = 3, column = 3)
 cCB = Checkbutton(window, text = 'C', variable = vCB2)
 cCB.grid(row = 3, column = 1)
 javaCB = Checkbutton(window, text = 'Java', variable = vCB3)
@@ -47,9 +56,10 @@ def var_states():
     print("Check" + str(vCB1.get()))
     print("Check" + str(vCB2.get()))
     print("Check" + str(vCB3.get()))
+
 printButton = Button(window, text='Show', command=var_states)
-printButton.grid(row = 4)
+printButton.grid(row = 4, column = 1)
 exitButton = Button(window, text = 'Exit', command=window.quit)
-exitButton.grid(row = 4, column = 1)
+exitButton.grid(row = 4, column = 2)
 
 window.mainloop()
