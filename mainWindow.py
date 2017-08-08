@@ -4,6 +4,14 @@ import json
 window = Tk()
 window.title('Registration Form')
 
+menu = Menu(window)
+window.config(menu=menu)
+filemenu = Menu(menu)
+menu.add_cascade(label="File", menu=filemenu)
+filemenu.add_command(label="View Records")
+filemenu.add_separator()
+filemenu.add_command(label="Exit", command=window.quit)
+
 fnameLabel = Label(window, text = 'First Name: ')
 fnameLabel.grid(row = 0)
 lnameLabel = Label(window, text = 'Last Name: ')
