@@ -1,11 +1,19 @@
 from tkinter import *
+import tkMessageBox
 
 window = Tk()
 window.title('Registration Form')
+window.geometry('300x190')
 
-def exitMain():
+
+def exit():
     global window
     window.quit()
+
+def exitMain():
+    result = tkMessageBox.askquestion("Exit", "Are you sure you want to exit?", icon = 'warning')
+    if result == 'yes':
+        exit()
 
 menu = Menu(window)
 window.config(menu = menu)
@@ -17,48 +25,51 @@ fileMenu.add_separator()
 fileMenu.add_command(label = "Exit", command = exitMain)
 
 menu.add_cascade(label = "About", menu = aboutMenu)
-fileMenu.add_command(label = "About Us")
+aboutMenu.add_command(label = "About Us")
 
 fnameLabel = Label(window, text = 'First Name: ')
-fnameLabel.grid(row = 0)
+fnameLabel.place(x = 15, y = 5)
 lnameLabel = Label(window, text = 'Last Name: ')
-lnameLabel.grid(row = 1)
+lnameLabel.place(x = 15, y = 30)
 
 fnameEntry = Entry(window)
-fnameEntry.grid(row = 0, column = 1)
+fnameEntry.place(x = 100, y = 5)
 lnameEntry = Entry(window)
-lnameEntry.grid(row = 1, column = 1)
+lnameEntry.place(x = 100, y = 30)
 
 genderLabel = Label(window, text = 'Gender: ')
-genderLabel.grid(row = 2)
+genderLabel.place(x = 15, y = 60)
 
 vRB = IntVar()
 maleRB = Radiobutton(window, text = 'Male', variable = vRB, value = 1)
-maleRB.grid(row = 2, column = 1)
+maleRB.place(x = 90, y = 60)
 femaleRB = Radiobutton(window, text = 'Female', variable = vRB, value = 2)
-femaleRB.grid(row = 2, column = 2)
+femaleRB.place(x = 155, y = 60)
 
 vCB1 = IntVar()
 vCB2 = IntVar()
 vCB3 = IntVar()
 langLabel = Label(window, text = 'Select languages: ')
-langLabel.grid(row = 3)
+langLabel.place(x = 15, y = 85)
 pythonCB = Checkbutton(window, text = 'Python', variable = vCB1)
-pythonCB.grid(row = 3, column = 3)
+pythonCB.place(x = 135, y = 85)
 cCB = Checkbutton(window, text = 'C', variable = vCB2)
-cCB.grid(row = 3, column = 1)
+cCB.place(x = 200, y = 85)
 javaCB = Checkbutton(window, text = 'Java', variable = vCB3)
-javaCB.grid(row = 3, column = 2)
+javaCB.place(x = 235, y = 85)
 
 choices = ['Secondary School', 'High School', 'Graduate', 'Post Graduate']
 var = StringVar(window)
 dropMenuLabel = Label(window, text = 'Select Education: ')
-dropMenuLabel.grid(row = 4)
+dropMenuLabel.place(x = 15, y = 115)
 eduDropMenu = OptionMenu(window, var, *choices)
-eduDropMenu.grid(row = 4, column = 1)
+eduDropMenu.place(x = 140, y = 110)
 
 def printDetails():
     global vRB, vCB1, vCB2, vCB3, fnameEntry, lnameEntry, var
+
+    fname = fnameEntry.get()
+    lname = lnameEntry.get()
 
     gender = str()
     if vRB.get() == 1:
@@ -67,7 +78,6 @@ def printDetails():
         gender = 'Female'
 
     edu = var.get()
-    print(edu)
 
     langs = str()
     if vCB1.get() == 1:
@@ -76,32 +86,30 @@ def printDetails():
         langs += ' C'
     if vCB3.get() == 1:
         langs += ' Java'
-    print(langs)
 
     infoWindow = Tk()
     infoWindow.title('User Details')
+    infoWindow.geometry('180x155')
 
-    text = 'First Name: %s\n\nLast Name: %s\n\nGender: %s\n\nLanguages: %s\n\nEducation: %s' %(fnameEntry.get(), lnameEntry.get(), gender, langs, edu)
+    fnameLabel = Label(infoWindow, text = 'First Name: ' + fname)
+    fnameLabel.place(x = 5, y = 5)
+    lnameLabel = Label(infoWindow, text = 'last Name: ' + lname)
+    lnameLabel.place(x = 5, y = 25)
+    genderLabel = Label(infoWindow, text = 'Gender: ' + gender)
+    genderLabel.place(x = 5, y = 45)
+    langLabel = Label(infoWindow, text = 'Languages: ' + langs)
+    langLabel.place(x = 5, y = 65)
+    eduLabel = Label(infoWindow, text = 'Education: ' + edu)
+    eduLabel.place(x = 5, y = 85)
 
-    infoLabel = Label(infoWindow, text = text)
-    infoLabel.pack()
+    okayButton = Button(infoWindow, text = 'Okay', command = infoWindow.quit)
+    okayButton.place(x = 60, y = 115)
+    exitButton = Button(infoWindow, text = 'Exit', command = infoWindow.quit)
+    exitButton.place(x = 120, y = 115)
 
-    def exitInfo():
-        #global infoWindow
-        infoWindow.quit()
-
-    def prevWindow():
-        exitInfo()
-        import mainWindow
-
-    backButton = Button(infoWindow, text = 'Back', command = prevWindow)
-    backButton.pack()
-    exitButton = Button(infoWindow, text = 'Exit', command = exitInfo)
-    exitButton.pack()
-
-printButton = Button(window, text='Show', command = printDetails)
-printButton.grid(row = 5, column = 1)
+printButton = Button(window, text='Show Details', command = printDetails)
+printButton.place(x = 125, y = 150)
 exitButton = Button(window, text = 'Exit', command = exitMain)
-exitButton.grid(row = 5, column = 2)
+exitButton.place(x = 235, y = 150)
 
 window.mainloop()
