@@ -1,6 +1,8 @@
 from tkinter import *
 import tkMessageBox
 
+from functools import partial
+
 window = Tk()
 window.title('Registration Form')
 window.geometry('300x190')
@@ -102,11 +104,13 @@ def printDetails():
     eduLabel = Label(infoWindow, text = 'Education: ' + edu)
     eduLabel.place(x = 5, y = 85)
 
-    okayButton = Button(infoWindow, text = 'Okay', command = infoWindow.quit)
+    okayButton = Button(infoWindow, text = 'Okay', command = partial(Quit,infoWindow))
     okayButton.place(x = 60, y = 115)
     exitButton = Button(infoWindow, text = 'Exit', command = infoWindow.quit)
     exitButton.place(x = 120, y = 115)
 
+def Quit(id):
+    id.destroy()
 printButton = Button(window, text='Show Details', command = printDetails)
 printButton.place(x = 125, y = 150)
 exitButton = Button(window, text = 'Exit', command = exitMain)
