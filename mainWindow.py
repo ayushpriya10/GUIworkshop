@@ -1,6 +1,6 @@
 #import statements to include the required modules
 from tkinter import *
-import tkMessageBox
+from tkMessageBox import *
 from functools import partial
 
 #Creating the root instance of the GUI
@@ -15,7 +15,7 @@ def exit():
 
 #Defining exit prompt function
 def exitMain():
-    result = tkMessageBox.askquestion("Exit", "Are you sure you want to exit?", icon = 'warning')
+    result = askquestion("Exit", "Are you sure you want to exit?", icon = 'warning')
     if result == 'yes':
         exit()
 
