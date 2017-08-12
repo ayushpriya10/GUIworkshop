@@ -1,8 +1,3 @@
-# GDG (a Nibbles clone)
-# By Al Sweigart al@inventwithpython.com
-# http://inventwithpython.com/pygame
-# Released under a "Simplified BSD" license
-
 import random, pygame, sys
 from pygame.locals import *
 
@@ -40,7 +35,7 @@ def main():
     BASICFONT = pygame.font.Font('freesansbold.ttf', 18)
     pygame.display.set_caption('Snake Game')
 
-    showStartScreen()
+    #showStartScreen()
     while True:
         runGame()
         showGameOverScreen()
